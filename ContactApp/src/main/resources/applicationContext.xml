@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="daoContact" class="com.esiea.ihm.dao.ContactDaoImpl" init-method="init"></bean>
+	<bean id="ContactSigleton" class="com.esiea.ihm.metier.ContactSingleton">
+		<property name="dao" ref="daoContact"></property>
+	</bean>
+	
+	<bean id="daoAddress" class="com.esiea.ihm.dao.AddressDaoImpl" init-method="init"></bean>
+	<bean id="Contact" class="com.esiea.ihm.metier.Contact">
+		<property name="dao" ref="daoAddress"></property>
+	</bean>
+	
+	<!-- autowiring byName, bean name should be same as the property name -->
+	<bean name="metier" class="com.esiea.ihm.metier.ContactSingleton" autowire="byName" />
+	
+	
+</beans>
